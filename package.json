@@ -2,9 +2,12 @@
   "name": "tslox",
   "version": "1.0.0",
   "description": "TypeScript tree-walk interpreter for the Lox programming language",
-  "main": "dist/lox.js",
+  "main": "dist/client/extension.js",
+  "displayName": "Lox Language Support",
   "scripts": {
     "build": "tsc",
+    "build:server": "tsc",
+    "build:client": "tsc",
     "start": "node dist/lox.js",
     "dev": "tsx src/lox.ts",
     "test": "jest",
@@ -16,15 +19,47 @@
   "keywords": [
     "lox",
     "typescript",
-    "interpreter"
+    "interpreter",
+    "lsp",
+    "language-server"
   ],
   "author": "piconkayal <piconn.js@gmail.com>",
   "license": "MIT",
   "packageManager": "pnpm@10.18.2",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "lox",
+        "aliases": ["Lox", "lox"],
+        "extensions": [".lox"],
+        "configuration": "./language-configuration.json",
+        "firstLine": "^\\s*(//|var|fun|class|print)"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "lox",
+        "scopeName": "source.lox",
+        "path": "./syntaxes/lox.tmLanguage.json"
+      }
+    ]
+  },
+  "dependencies": {
+    "vscode-languageserver": "^9.0.0",
+    "vscode-languageserver-textdocument": "^1.0.12",
+    "vscode-languageclient": "^9.0.0"
+  },
   "devDependencies": {
     "@biomejs/biome": "^2.3.5",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.10.1",
+    "@types/vscode": "^1.90.0",
     "jest": "^30.2.0",
     "oxlint": "^1.28.0",
     "ts-jest": "^29.4.5",

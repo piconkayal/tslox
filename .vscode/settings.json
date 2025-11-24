@@ -39,6 +39,12 @@
     "editor.defaultFormatter": "biomejs.biome",
     "editor.formatOnSave": true
   },
+  "[lox]": {
+    "editor.defaultFormatter": null
+  },
+  "files.associations": {
+    "*.lox": "lox"
+  },
   "debug.allowBreakpointsEverywhere": true,
   "debug.javascript.autoAttachFilter": "smart",
   "debug.javascript.suggestPrettyPrinting": false
